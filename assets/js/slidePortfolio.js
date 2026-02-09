@@ -39,6 +39,18 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-document.getElementById('fale-comigo').addEventListener('click', function(){
-    document.getElementById('contato').scrollIntoView({behavior: 'smooth'});
-});
+// Scroll suave para a seção de contato a partir do botão 'fale-comigo'
+const faleBtn = document.getElementById('fale-comigo');
+if (faleBtn) {
+    faleBtn.addEventListener('click', function() {
+        // Suporta tanto id 'contact' quanto 'contato'
+        const target = document.getElementById('contact') || document.getElementById('contato');
+        if (target && typeof target.scrollIntoView === 'function') {
+            target.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            console.warn('Elemento de contato não encontrado para scroll.');
+        }
+    });
+} else {
+    console.warn("Botão 'fale-comigo' não encontrado no DOM.");
+}

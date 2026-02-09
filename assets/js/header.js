@@ -24,4 +24,31 @@ document.addEventListener('DOMContentLoaded', function () {
             body.classList.remove('no-scroll');
         });
     });
+
+    // Theme toggle (dark <-> light)
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    function applyTheme(isLight) {
+        if (isLight) {
+            document.body.classList.add('light-theme');
+            if (themeIcon) themeIcon.className = 'bi bi-sun-fill';
+        } else {
+            document.body.classList.remove('light-theme');
+            if (themeIcon) themeIcon.className = 'bi bi-moon-fill';
+        }
+    }
+
+    // Load saved preference
+    const saved = localStorage.getItem('site-theme');
+    const initialLight = saved === 'light';
+    applyTheme(initialLight);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function () {
+            const isLight = !document.body.classList.contains('light-theme');
+            applyTheme(isLight);
+            localStorage.setItem('site-theme', isLight ? 'light' : 'dark');
+        });
+    }
 });
