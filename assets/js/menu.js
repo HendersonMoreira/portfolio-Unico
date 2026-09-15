@@ -1,14 +1,28 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Elementos de controle do menu
-    const menuToggle = document.getElementById('menuToggle');
-    const menuAberto = document.querySelector('.menu-aberto');
+    const menuButton = document.getElementById('menuButton');
+    const siteMenu = document.getElementById('siteMenu');
 
-    // Abre/fecha o menu ao mudar o estado do checkbox
-    menuToggle.addEventListener('change', function () {
-        if (menuToggle.checked) {
-            menuAberto.classList.add('active');
-        } else {
-            menuAberto.classList.remove('active');
+    if (!menuButton || !siteMenu) return;
+
+    function setMenuState(isOpen) {
+        siteMenu.classList.toggle('is-open', isOpen);
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    menuButton.addEventListener('click', function (event) {
+        event.stopPropagation();
+        setMenuState(!siteMenu.classList.contains('is-open'));
+    });
+
+    siteMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function () {
+            setMenuState(false);
+        });
+    });
+
+    document.addEventListener('click', function (event) {
+        if (!siteMenu.contains(event.target) && event.target !== menuButton) {
+            setMenuState(false);
         }
     });
 });

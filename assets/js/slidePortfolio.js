@@ -51,6 +51,4 @@ if (faleBtn) {
             console.warn('Elemento de contato não encontrado para scroll.');
         }
     });
-} else {
-    console.warn("Botão 'fale-comigo' não encontrado no DOM.");
 }

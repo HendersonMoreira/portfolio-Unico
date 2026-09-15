@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Clona o elemento com o ID 'headline-scroll' para criar um efeito de rolagem contínua
     const headlineScroll = document.getElementById('headline-scroll');
+    if (!headlineScroll || !headlineScroll.parentNode) return;
     const clone = headlineScroll.cloneNode(true);
     headlineScroll.parentNode.appendChild(clone);
 

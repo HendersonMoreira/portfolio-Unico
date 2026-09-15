@@ -6,15 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const body = document.body;
 
     // Abre/fecha o menu ao mudar o estado do checkbox
-    menuToggle.addEventListener('change', function () {
-        if (menuToggle.checked) {
-            menuAberto.classList.add('active');
-            body.classList.add('no-scroll');
-        } else {
-            menuAberto.classList.remove('active');
-            body.classList.remove('no-scroll');
-        }
-    });
+    if (menuToggle && menuAberto) {
+        menuToggle.addEventListener('change', function () {
+            menuAberto.classList.toggle('active', menuToggle.checked);
+            body.classList.toggle('no-scroll', menuToggle.checked);
+        });
+    }
 
     // Fecha o menu ao clicar em um link de navegação
     navLinks.forEach(link => {
